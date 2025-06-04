@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cognitive Offload Slider</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      max-width: 700px;
+      margin: auto;
+    }
+    .slider-container {
+      margin: 2em 0;
+    }
+    .slider-label {
+      font-weight: bold;
+    }
+    #offload-slider {
+      width: 100%;
+      margin-top: 1em;
+    }
+    .description {
+      margin-top: 1.5em;
+      font-size: 1rem;
+      background-color: #f5f5f5;
+      padding: 1em;
+      border-left: 4px solid #007ACC;
+    }
+  </style>
+</head>
+<body>
+  <h1>AI Cognitive Offload Slider</h1>
+
+ <p>
+  This slider illustrates how Generative AI can be used to varying degrees for a single assignment: 
+  a presentation on <strong>Cumberland Gap National Historical Park</strong>. In this scenario, students are tasked 
+  with researching and presenting on the park's significance, history, and geography. Depending on the 
+  learning goals of the course or assignment, different levels of AI involvement may be appropriate. 
+  Use the slider below to explore five levels of increasing cognitive offload to AI—from fully student-generated work 
+  to near-complete AI generation.
+</p>
+
+  <div class="slider-container">
+    <label for="offload-slider" class="slider-label">
+      Level of Cognitive Offload to AI:
+    </label>
+    <input type="range"
+           id="offload-slider"
+           role="slider"
+           aria-valuemin="1"
+           aria-valuemax="5"
+           aria-valuenow="1"
+           aria-valuetext="Level 1: Fully Human-Crafted"
+           min="1"
+           max="5"
+           step="1"
+           />
+    <div id="offload-description" class="description" aria-live="polite">
+      <strong>Level 1 – Fully Human-Crafted</strong><br />
+      Student does all research, writing, and presentation design without AI.
+    </div>
+  </div>
+
+  <script>
+    const slider = document.getElementById("offload-slider");
+    const description = document.getElementById("offload-description");
+
+    const levels = {
+      1: {
+        label: "Level 1 – Fully Human-Crafted",
+        text: "Student does all research, writing, and presentation design without AI."
+      },
+      2: {
+        label: "Level 2 – Light AI Support",
+        text: "AI helps with brainstorming or outlining, but student does the rest."
+      },
+      3: {
+        label: "Level 3 – AI-Assisted Drafting",
+        text: "Student writes first draft and uses AI to revise or rephrase."
+      },
+      4: {
+        label: "Level 4 – AI First Draft",
+        text: "AI generates draft; student edits and personalizes content."
+      },
+      5: {
+        label: "Level 5 – Fully AI-Generated",
+        text: "AI generates the full presentation with minimal student input."
+      }
+    };
+
+    slider.addEventListener("input", () => {
+      const level = levels[slider.value];
+      slider.setAttribute("aria-valuenow", slider.value);
+      slider.setAttribute("aria-valuetext", level.label);
+      description.innerHTML = <strong>${level.label}</strong><br />${level.text};
+    });
+  </script>
+</body>
+</html>
